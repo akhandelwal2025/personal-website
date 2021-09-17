@@ -4,14 +4,14 @@
 h1{
     font-family: "Source Sans Pro", sans-serif;
     font-weight: 300;
-    font-size: 200%;
+    font-size: 2.75vw;
     text-align: center;
 }
 
 p{
     font-family: "Source Sans Pro", sans-serif;
     font-weight: 300;
-    font-size: 100%;
+    font-size: 1.25vw;
     padding-left: 9%;
 	padding-right: 9%;
     line-height: 150%;
