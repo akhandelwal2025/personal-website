@@ -13,7 +13,7 @@
             <div class="homepagediv">
                 <img src="assets/images/avatar_large.jpg" class="avatar"/>
                 <h1>Ankit Khandelwal</h1>
-                <p>Aspiring Electrical & Computer Engineer looking to tackle rigorous challenges at the forefront of innovation</p>
+                <p class="homepageP">Aspiring Electrical & Computer Engineer looking to tackle rigorous challenges at the forefront of innovation</p>
                 <a href="#first" class="button big wide smooth-scroll-middle">Download Resume</a>
                 <a href="#first" class="button big wide smooth-scroll-middle">Contact Me</a>
             </div>
@@ -25,91 +25,41 @@
             </header>
             <div class="posts">
                 <article>
-                    <a href="#" class="image"><img src="assets/images/caelus-pcbs-horizontal.png" alt="" /></a>
+                    <a href="caelus-avionics.html" class="image"><img src="assets/images/caelus-pcbs-horizontal.png" alt="" /></a>
                     <h3>Project Caelus Avionics System</h3>
-                    <p>Control board for rocket engine containing flight computer, sensors, and valves</p>
+                    <p class="articlePostP">Custom PCBs for rocket engine test stand to support flight computer, sensors, and valve actuation boards. Groundstation override allows human operator to take control at any time.</p>
                     <ul class="actions">
-                        <li><a href="#" class="button">More</a></li>
+                        <li><a href="caelus-avionics.html" class="button1">Learn More</a></li>
                     </ul>
                 </article>
                 <article>
-                    <a href="#" class="image"><img src="assets/images/ascent_profile_pic.png" alt="" /></a>
-                    <h3>Nulla amet dolore</h3>
-                    <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                    <a href="#" class="image"><img src="assets/images/ascent_profile_pic.PNG" alt="" /></a>
+                    <h3>Vertical Take-off and Landing Rocket</h3>
+                    <p class="articlePostP">Propeller-powered rocket that can autonomously hover and land. Running custom C++ software, using Read-Control-Actuate logic, with onboard Kalman Filtering.</p>
                     <ul class="actions">
-                        <li><a href="#" class="button">More</a></li>
+                        <li><a href="#" class="button1">Learn More</a></li>
                     </ul>
                 </article>
                 <article>
-                    <a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-                    <h3>Tempus ullamcorper</h3>
-                    <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                    <a href="#" class="image"><img src="assets/images/drone_pt2.PNG" alt="" /></a>
+                    <h3>Custom Drone - Mark II</h3>
+                    <p class="articlePostP">Fully custom drone based on Raspberry Pi 3. Frame designed in Fusion 360 CAD. Running custom C++ flight software with built-in PID feedback loops. </p>
                     <ul class="actions">
-                        <li><a href="#" class="button">More</a></li>
+                        <li><a href="#" class="button1">Learn More</a></li>
                     </ul>
                 </article>
                 <article>
-                    <a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-                    <h3>Sed etiam facilis</h3>
-                    <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                    <a href="#" class="image"><img src="assets/images/drone_pt1.PNG" alt="" /></a>
+                    <h3>Custom Drone - Mark I</h3>
+                    <p class="articlePostP">Custom drone based on COTS parts. Running open-source BetaFlight software. Logged 50+ flight hours on simulator, 25+ hours drone pilot hours.</p>
                     <ul class="actions">
-                        <li><a href="#" class="button">More</a></li>
+                        <li><a href="#" class="button1">Learn More</a></li>
                     </ul>
                 </article>
             </div>
         </section>
 
-        <h3>Form</h3>
-
-        <form method="post" action="#">
-            <div class="row gtr-uniform">
-                <div class="col-6 col-12-xsmall">
-                    <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-                </div>
-                <div class="col-6 col-12-xsmall">
-                    <input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-                </div>
-                <div class="col-12">
-                    <select name="demo-category" id="demo-category">
-                        <option value="">- Category -</option>
-                        <option value="1">Manufacturing</option>
-                        <option value="1">Shipping</option>
-                        <option value="1">Administration</option>
-                        <option value="1">Human Resources</option>
-                    </select>
-                </div>
-                <div class="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-low" name="demo-priority" checked>
-                    <label for="demo-priority-low">Low</label>
-                </div>
-                <div class="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-normal" name="demo-priority">
-                    <label for="demo-priority-normal">Normal</label>
-                </div>
-                <div class="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-high" name="demo-priority">
-                    <label for="demo-priority-high">High</label>
-                </div>
-
-                <div class="col-6 col-12-small">
-                    <input type="checkbox" id="demo-copy" name="demo-copy">
-                    <label for="demo-copy">Email me a copy</label>
-                </div>
-                <div class="col-6 col-12-small">
-                    <input type="checkbox" id="demo-human" name="demo-human" checked>
-                    <label for="demo-human">I am a human</label>
-                </div>
-                <div class="col-12">
-                    <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-                </div>
-                <div class="col-12">
-                    <ul class="actions">
-                        <li><input type="submit" value="Send Message" class="primary" /></li>
-                        <li><input type="reset" value="Reset" /></li>
-                    </ul>
-                </div>
-            </div>
-        </form>      
+    
         
 				<!-- Sidebar -->
 					<div id="sidebar">
@@ -133,8 +83,9 @@
                                             <span class="opener"></span>Projects</span>
 											<ul>
 												<li><a href="#">VTOL Craft</a></li>
-												<li><a href="#">DIY Quadcopter</a></li>
 												<li><a href="#">Caelus Avionics</a></li>
+												<li><a href="#">Custom Drone - Mark II</a></li>												
+												<li><a href="#">Custom Drone - Mark I</a></li>
 											</ul>
                                         </li>
                                         
