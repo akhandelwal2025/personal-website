@@ -1,0 +1,503 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Project Caelus Avionics System</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main_editorial.css"/>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Ankit Khandelwal</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Ascent -Vertical Take-off and Landing Rocket</h1>
+									</header>
+
+									<!-- Content -->	
+									<div class="row gtr-200">
+										<div class="col-6 col-12-small">
+											<p>
+												<br/>
+												<br/>
+												<br/>
+												<br/>
+												<br/>
+												As part of my high school Senior Research project, some friends and I wanted to build a SpaceX-like rocket that could autonomously hover and land. 
+												Though our formal reason for undertaking this project, codenamed Ascent, was to learn about control algorithms and mechanical design (which was true), 
+												the real reason was because we thought this was a dang-cool project!
+											</p>
+										</div>
+										<div class="col-6 col-12-small">
+											<span class="image fit"><img src="assets/images/ascent_profile_pic.PNG" alt="" /></span>
+										</div>
+									</div> 
+									
+									<h2 id="elements">Design Overview</h2>
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/caelus-pcbs-horizontal.png" alt="" /></span>
+										</div>
+										<div class="col-6 col-12-medium">
+											<p>
+												At the heart of the system is a two-layer copper PCB that hosts a Teensy 3.6 flight computer running 
+												C++ flight software. The system can simultaneously: 
+											</p>
+											<ul>
+												<li>Take measurements from:
+													<ul>
+														<li>12 Pressure Transducers</li>
+														<li>5 Thermocouples (temperature sensors)</li>
+														<li>3 Load Cells (force/weight sensors)</li>
+													</ul>
+												</li>
+												<li>Actuate up to 12 solenoid valves</li>
+												<li>Transmit all sensor measurements / valve states / additional telemetry to ground station</li>
+												<li>Provide hardware override for ground station operators in need of abort</li>
+											</ul>
+											<p>With the onboard batteries, the system could be powered continuously for up to three hours, which was necessary for 
+												long-duration tests. All parts were conformal coated, protecting them from dust, moisture, and extreme temperatures.
+											</p>
+									</div> 
+									
+									<h2 id="elements">Design Process</h2>
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/kicad_schematic.jpg" alt="" /></span>
+										</div>
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/kicad_brd.PNG" alt="" /></span>
+										</div>
+									</div> 
+									<div class="row gtr-200">
+										<p class="align-center">After getting design requirements and constraints from the Propulsion team, the Avionics team got to work 
+											designing the system in KiCAD, a PCB-designer software.
+										</p>
+									</div> 
+
+									<div class="row">
+										<div class="col-6 col-12-small">
+											<h3>Pressure Transducers (PTs)</h3>
+											<p>Each PT provides three wires: Red (5V+), Black (GND), and Green (Signal). The sensor outputs a 5V signal that needs to be 
+												attenuated to a 3.3V signal for our Teensy 3.6 microcontroller. To achieve this, every signal input is routed through a 
+												voltage divider that cuts the signal by a third. Due to high power losses across the resistors, future iterations will 
+												utilize Inverting Op-Amps with a fractional gain to achieve the attenuated signal.</p>
+										</div>
+										<div class="col-6 col-12-small">
+											<h3>Thermocouples</h3>
+											<p>Each K-type, ungrounded thermocouple requires an amplifier to make the millivolt output readable by the Teensy 3.6 flight 
+												computer. For this, we chose the Adafruit MAX31856 amplifier due to its compatibility, reliability, and affordability. 
+												The MAX31856 communicates with the FC via the SPI serial protocol.</p>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-6 col-12-small">
+											<h3>Load Cells</h3>
+											<p>Load cells are essentially electronic strain gauges, so they can be used to measure the weight of our tanks and the thrust 
+												generated by our engine. Similar to the thermocouples, each load cell outputs a millivolt signal which needs to be amplified 
+												for the FC. For this, we use the SparkFun HX711 amplifier which communicates with the FC via serial communication.</p>
+										</div>
+										<div class="col-6 col-12-small">
+											<h3>Data Transmission</h3>
+											<p>All sensor measurements, valve states, and flight software variables are transmitted to the ground station via an Xbee radio. 
+												Data packets are sent 10 times a second, allowing for ground station operators to get a comprehensive view of the state of 
+												the entire system at any moment.</p>
+										</div>
+									</div>
+
+									
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<iframe width=125% height=100% src="https://www.youtube.com/embed/p4ngdx5mxRw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+										</div>
+
+										<div class="col-6 col-12-medium">
+											<h3>Solenoid Actuation</h3>
+											<p>
+												Solenoid valves are relatively simple devices – internally, they contain a coil of wire attached to a plunger that opens and closes 
+												the valve when a current is applied. The Teensy 3.6 cannot supply enough current to actuate these valves; thus, the FC controlled 
+												Arduino Relays, which supplied power from our 6S Lipos to open/close the valves. In future iteratios, the Arduino Relays will be replaced 
+												by power transistors which consume less power during operation.
+												<br/>
+												<br/>
+												However, to allow for groundstation override capabilities via the Launchbox 
+												(explained later), each relay needs to be connected to both the FC and the groundstation. To achieve this, every relay signal line was 
+												attached to a DG419 IC (essentially an electronic switch) that allows the relay to be controlled by both input sources. When the Launchbox 
+												is enabled, the enable pin for each DG419 is toggled HIGH, thereby connecting each relay to the groundstation and allowing for manual 
+												 override.
+											</p>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<h3>Power Distribution Board</h3>
+											<p>
+												As mentioned in the Solenoid Actuation section, every solenoid valve needs to be powered via an external battery source (in our case, 
+												a 6S lipo). The Power Distribution Board (PDB) provides multiple 24V and 12V terminals to power the various solenoids on the test stand. 
+												The board is powered via a 6S Lipo (24V battery) that runs through an external step-down converter to power the 12V terminals. Future 
+												iterations of the board will include built-in XT-60 connectors instead of solder pads to allow for better wiring organization and easier 
+												connections.
+											</p>
+										</div>
+
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/pdb.PNG" alt="" /></span>
+										</div>
+									</div>
+									<hr class="major" />
+
+									<!-- Elements -->
+										<div class="row gtr-200">
+											<div class="col-6 col-12-medium">
+
+												<!-- Text stuff -->
+													<h3>Text</h3>
+													<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+													This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+													This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
+													Finally, this is a <a href="#">link</a>.</p>
+													<hr />
+													<h2>Heading Level 2</h2>
+													<h3>Heading Level 3</h3>
+													<h4>Heading Level 4</h4>
+													<hr />
+													<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+
+												<!-- Lists -->
+													<h3>Lists</h3>
+													<div class="row">
+														<div class="col-6 col-12-small">
+
+															<h4>Unordered</h4>
+															<ul>
+																<li>Dolor etiam magna etiam.</li>
+																<li>Sagittis lorem eleifend.</li>
+																<li>Felis dolore viverra.</li>
+															</ul>
+
+															<h4>Alternate</h4>
+															<ul class="alt">
+																<li>Dolor etiam magna etiam.</li>
+																<li>Sagittis lorem eleifend.</li>
+																<li>Felis feugiat viverra.</li>
+															</ul>
+
+														</div>
+														<div class="col-6 col-12-small">
+
+															<h4>Ordered</h4>
+															<ol>
+																<li>Dolor etiam magna etiam.</li>
+																<li>Etiam vel lorem sed viverra.</li>
+																<li>Felis dolore viverra.</li>
+																<li>Dolor etiam magna etiam.</li>
+																<li>Etiam vel lorem sed viverra.</li>
+																<li>Felis dolore viverra.</li>
+															</ol>
+
+															<h4>Icons</h4>
+															<ul class="icons">
+																<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+																<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+																<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+																<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+																<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+																<li><a href="#" class="icon brands fa-tumblr"><span class="label">Tumblr</span></a></li>
+															</ul>
+
+														</div>
+													</div>
+													<h4>Definition</h4>
+													<dl>
+														<dt>Item1</dt>
+														<dd>
+															<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor.</p>
+														</dd>
+														<dt>Item2</dt>
+														<dd>
+															<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor.</p>
+														</dd>
+														<dt>Item3</dt>
+														<dd>
+															<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor.</p>
+														</dd>
+													</dl>
+
+													<h4>Actions</h4>
+													<ul class="actions">
+														<li><a href="#" class="button primary">Default</a></li>
+														<li><a href="#" class="button">Default</a></li>
+													</ul>
+													<ul class="actions small">
+														<li><a href="#" class="button primary small">Small</a></li>
+														<li><a href="#" class="button small">Small</a></li>
+													</ul>
+													<div class="row">
+														<div class="col-6 col-12-small">
+															<ul class="actions stacked">
+																<li><a href="#" class="button primary">Default</a></li>
+																<li><a href="#" class="button">Default</a></li>
+															</ul>
+														</div>
+														<div class="col-6 col-12-small">
+															<ul class="actions stacked">
+																<li><a href="#" class="button primary small">Small</a></li>
+																<li><a href="#" class="button small">Small</a></li>
+															</ul>
+														</div>
+														<div class="col-6 col-12-small">
+															<ul class="actions stacked">
+																<li><a href="#" class="button primary fit">Default</a></li>
+																<li><a href="#" class="button fit">Default</a></li>
+															</ul>
+														</div>
+														<div class="col-6 col-12-small">
+															<ul class="actions stacked">
+																<li><a href="#" class="button primary small fit">Small</a></li>
+																<li><a href="#" class="button small fit">Small</a></li>
+															</ul>
+														</div>
+													</div>
+
+													<h4>Pagination</h4>
+													<ul class="pagination">
+														<li><span class="button disabled">Prev</span></li>
+														<li><a href="#" class="page active">1</a></li>
+														<li><a href="#" class="page">2</a></li>
+														<li><a href="#" class="page">3</a></li>
+														<li><span>&hellip;</span></li>
+														<li><a href="#" class="page">8</a></li>
+														<li><a href="#" class="page">9</a></li>
+														<li><a href="#" class="page">10</a></li>
+														<li><a href="#" class="button">Next</a></li>
+													</ul>
+
+												<!-- Blockquote -->
+													<h3>Blockquote</h3>
+													<blockquote>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus.</blockquote>
+
+												<!-- Table -->
+													<h3>Table</h3>
+
+													<h4>Default</h4>
+													<div class="table-wrapper">
+														<table>
+															<thead>
+																<tr>
+																	<th>Name</th>
+																	<th>Description</th>
+																	<th>Price</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>Item1</td>
+																	<td>Ante turpis integer aliquet porttitor.</td>
+																	<td>29.99</td>
+																</tr>
+																<tr>
+																	<td>Item2</td>
+																	<td>Vis ac commodo adipiscing arcu aliquet.</td>
+																	<td>19.99</td>
+																</tr>
+																<tr>
+																	<td>Item3</td>
+																	<td> Morbi faucibus arcu accumsan lorem.</td>
+																	<td>29.99</td>
+																</tr>
+																<tr>
+																	<td>Item4</td>
+																	<td>Vitae integer tempus condimentum.</td>
+																	<td>19.99</td>
+																</tr>
+																<tr>
+																	<td>Item5</td>
+																	<td>Ante turpis integer aliquet porttitor.</td>
+																	<td>29.99</td>
+																</tr>
+															</tbody>
+															<tfoot>
+																<tr>
+																	<td colspan="2"></td>
+																	<td>100.00</td>
+																</tr>
+															</tfoot>
+														</table>
+													</div>
+
+													<h4>Alternate</h4>
+													<div class="table-wrapper">
+														<table class="alt">
+															<thead>
+																<tr>
+																	<th>Name</th>
+																	<th>Description</th>
+																	<th>Price</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>Item1</td>
+																	<td>Ante turpis integer aliquet porttitor.</td>
+																	<td>29.99</td>
+																</tr>
+																<tr>
+																	<td>Item2</td>
+																	<td>Vis ac commodo adipiscing arcu aliquet.</td>
+																	<td>19.99</td>
+																</tr>
+																<tr>
+																	<td>Item3</td>
+																	<td> Morbi faucibus arcu accumsan lorem.</td>
+																	<td>29.99</td>
+																</tr>
+																<tr>
+																	<td>Item4</td>
+																	<td>Vitae integer tempus condimentum.</td>
+																	<td>19.99</td>
+																</tr>
+																<tr>
+																	<td>Item5</td>
+																	<td>Ante turpis integer aliquet porttitor.</td>
+																	<td>29.99</td>
+																</tr>
+															</tbody>
+															<tfoot>
+																<tr>
+																	<td colspan="2"></td>
+																	<td>100.00</td>
+																</tr>
+															</tfoot>
+														</table>
+													</div>
+
+											</div>
+											
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="generic.html">Generic</a></li>
+										<li><a href="elements.html">Elements</a></li>
+										<li>
+											<span class="opener">Submenu</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Etiam Dolore</a></li>
+										<li><a href="#">Adipiscing</a></li>
+										<li>
+											<span class="opener">Another Submenu</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Maximus Erat</a></li>
+										<li><a href="#">Sapien Mauris</a></li>
+										<li><a href="#">Amet Lacinia</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+										<li class="icon solid fa-phone">(000) 000-0000</li>
+										<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
