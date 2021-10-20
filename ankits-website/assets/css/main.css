@@ -195,7 +195,7 @@ header.major > :last-child {
 /* Image */
 .image {
     border-radius: 0.375em;
-    box-shadow: 0 0 0 1pt grey;
+    outline: solid 1pt grey;
     display: inline-block;
     position: relative; }
     .image img {

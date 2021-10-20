@@ -1201,8 +1201,7 @@ input[type="radio"] + label:before {
   border-radius: 0.375em;
   border: 0;
   display: inline-block;
-  position: relative; 
-  margin-left: 10%;}
+  position: relative; }
   .image img {
     border-radius: 0.375em;
     display: block; }
@@ -1220,7 +1219,6 @@ input[type="radio"] + label:before {
     top: 0.25em; }
   .image.fit {
     display: block;
-    margin: 0 0 2em 0;
     width: 100%; }
     .image.fit img {
       width: 100%; }
