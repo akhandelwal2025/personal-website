@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Custom Drone - Mark II</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main_editorial.css"/>
+	</head>
+	<style type="text/css">
+		.gist {height:300px !important;}
+		.gist-file
+		.gist-data {max-height:400px;}
+	  </style>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Ankit Khandelwal</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->	
+									<div class="row gtr-200">
+										<div class="col-6 col-12-small">
+											<header class="main">
+												<h1>Custom Drone - Mark II</h1>
+											</header>
+											<p style="text-align: center;">
+												If you want to see my very first drone build, check it out <a href src="#">here</a>
+											</p>
+												<br/>
+												After creating my first drone using off-the-shelf parts and open-source software, I knew there was still a lot to learn. 
+												I still didn’t understand PID Feedback or the architecture of drone flight software. Therefore, I decided to build a completely 
+												custom drone with a Raspberry Pi 3 (later changed to Arduino Teensy) running my own custom flight software. 
+											</p>
+										</div>
+										<div class="col-6 col-12-small">
+											<span class="image fit"><img src="assets/images/drone_pt2.PNG" alt="" /></span>
+										</div>
+									</div> 
+									
+									
+									<div class="row gtr-200">
+										<div class="col-6 col-12-small">
+											<span class="image fit"><img src="assets/images/mark_2_mech.PNG" alt="" /></span>
+										</div>
+										<div class="col-6 col-12-small">
+											<br/>
+											<br/>
+											<br/>
+											<br/>
+											<br/>
+											<h2 id="elements">Mechanical Design</h2>
+											<p>
+												The drone’s frame was designed in Fusion 360 and 3D-printed using PLA plastic. I used four D2212 motors outfitted with generic 5-inch 
+												propellers for a maximum thrust of roughly 2.5kg. I decided to use cheap PWM Electronic Speed Controllers to control the motors, as I was 
+												running tight on my budget, and they could easily interface with the PWM outputs on my Raspberry Pi 3 flight computer. The onboard IMU (Adafruit BNO005) 
+												provided real-time angular positions that could be read by the flight computer. All of this was powered by a 3S, 2200mAh LiPo battery that had a 
+												theoretical battery life of 10-12 minutes.
+											</p>											
+										</div>
+										
+										
+									</div>
+									
+									<div class="row gtr-200">
+										<div class="col-6 col-12-small">
+											<br/>
+											<br/>
+											<h2 id="elements">PID Feedback</h2>
+											<p>
+												The goal of this project was mainly to learn about PID feedback. Though the code was relatively simple (shown on the right), the hard part lied in tuning 
+												the feedback system and finding the right gains. Because I didn’t know about Simulink and other auto-tuning systems, I decided the best way to find these 
+												gains was through brute force, trial-and-error. I designed a wooden test stand that isolated the drone’s rotation to just one axis and got to work in my 
+												garage iterating through different gains to find the right balance for smooth, level flight.											
+											</p>				
+										</div>
+										<div class="col-6 col-12-small">
+											<iframe frameborder=0 style="margin-bottom: 10%; width: 100%; max-width: 100%; height: 25em; max-height:30em;" scrolling="yes" seamless="seamless" 
+												srcdoc='<html>
+															<body>
+																	<script src="https://gist.github.com/amtron521/f72727ef51bad197f05a79f7eab53194.js"></script>
+															</body>
+														</html>'>
+											</iframe> 
+				
+										</div>
+									</div> 
+									<div class="row gtr-200">
+										<h2 style="margin-bottom:2%;"><b>Watch how my drone becomes smoother through manual tuning</b></h2>
+									</div>
+									<div class="row gtr-200">
+										<div class="col-4 col-12-medium">
+											<iframe width=100% height=300em src="https://www.youtube.com/embed/AvXKvSMTYMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+											<h4 style="text-align: center;"><b>Wow...that's pretty terrible</b></h4>
+										</div>
+										<div class="col-4 col-12-medium">
+											<iframe width=100% height=300em src="https://www.youtube.com/embed/i-MyApZ0NlU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+											<h4 style="text-align: center;"><b>Getting better</b></h4>
+										</div>
+										<div class="col-4 col-12-medium">
+											<iframe width=100% height=300em src="https://www.youtube.com/embed/CoWwADVuWVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+											<h4 style="text-align: center;"><b>Pretty good</b></h4>
+										</div>
+									</div> 
+									
+									<div class="row gtr-200">
+										<h1 style="margin-left:10%">
+											<b>This project is still in the works. Stay tuned to see it fly!</b> 
+										</h1>
+									</div>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+							<nav id="menu">
+								<header class="major">
+									<h2>Menu</h2>
+								</header>
+								<ul>
+									<li><a href="index.html">Homepage</a></li>
+									<li>
+										<span class="opener"></span>Projects</span>
+										<ul>
+											<li><a href="ascent.html">VTOL Craft</a></li>
+											<li><a href="caelus-avionics.html">Caelus Avionics</a></li>
+											<li><a href="drone_mark2.html">Custom Drone - Mark II</a></li>												
+											<li><a href="#">Custom Drone - Mark I</a></li>
+										</ul>
+									</li>
+									
+								</ul>
+							</nav>
+
+					</div>
+				</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
