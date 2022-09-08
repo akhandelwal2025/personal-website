@@ -35,7 +35,7 @@
 									<!-- Content -->	
 									<div class="row gtr-200">
 										<div class="col-6 col-12-medium">
-											<p>
+											<h3>
 												Project Caelus is a non-profit rocketry organization I helped start in high school. 
 												The team aims to be the first high school rocketry team to develop a liquid-fueled rocket engine and 
 												launch it to the edge of space (100km above the Earth’s surface). Over my three-year tenure with the team, 
@@ -48,23 +48,23 @@
 												and fuel measurements; and automatically toggle various solenoid valves to control the fuel/oxidizer outputs 
 												to the engine. The system also needed to be able to allow human operators to manually override the flight 
 												software and abort from a safe distance.
-											</p>
+											</h3>
 										</div>
 										<div class="col-6 col-12-medium">
 											<span class="image fit"><img src="assets/images/caelus-team.PNG" alt="" /></span>
 										</div>
 									</div> 
 									
-									<h2 id="elements">Design Overview</h2>
 									<div class="row gtr-200">
 										<div class="col-6 col-12-medium">
 											<span class="image fit"><img src="assets/images/caelus-pcbs-horizontal.png" alt="" /></span>
 										</div>
 										<div class="col-6 col-12-medium">
-											<p>
+											<h2 id="elements">Design Overview</h2>
+											<h3>
 												At the heart of the system is a two-layer copper PCB that hosts a Teensy 3.6 flight computer running 
 												C++ flight software. The system can simultaneously: 
-											</p>
+											
 											<ul>
 												<li>Take measurements from:
 													<ul style="margin-bottom: 2%;">
@@ -77,9 +77,9 @@
 												<li>Transmit all sensor measurements / valve states / additional telemetry to ground station</li>
 												<li>Provide hardware override for ground station operators in need of abort</li>
 											</ul>
-											<p>With the onboard batteries, the system could be powered continuously for up to three hours, which was necessary for 
+												With the onboard batteries, the system could be powered continuously for up to three hours, which was necessary for 
 												long-duration tests. All parts were conformal coated, protecting them from dust, moisture, and extreme temperatures.
-											</p>
+											</h3>
 									</div> 
 									
 									<h2 id="elements">Design Process</h2>
@@ -92,39 +92,39 @@
 										</div>
 									</div> 
 									<div class="row gtr-200">
-										<p class="align-center">After getting design requirements and constraints from the Propulsion team, the Avionics team got to work 
+										<h3 class="align-center">After getting design requirements and constraints from the Propulsion team, the Avionics team got to work 
 											designing the system in KiCAD, a PCB-designer software.
-										</p>
+										</h3>
 									</div> 
 
 									<div class="row gtr-200">
 										<div class="col-6 col-12-small">
-											<h3>Pressure Transducers (PTs)</h3>
-											<p>Each PT provides three wires: Red (5V+), Black (GND), and Green (Signal). The sensor outputs a 5V signal that needs to be 
+											<h3><b>Pressure Transducers (PTs)</b></h3>
+											<h3>Each PT provides three wires: Red (5V+), Black (GND), and Green (Signal). The sensor outputs a 5V signal that needs to be 
 												attenuated to a 3.3V signal for our Teensy 3.6 microcontroller. To achieve this, every signal input is routed through a 
 												voltage divider that cuts the signal by a third. Due to high power losses across the resistors, future iterations will 
-												utilize Inverting Op-Amps with a fractional gain to achieve the attenuated signal.</p>
+												utilize Inverting Op-Amps with a fractional gain to achieve the attenuated signal.</h3>
 										</div>
 										<div class="col-6 col-12-small">
-											<h3>Thermocouples</h3>
-											<p>Each K-type, ungrounded thermocouple requires an amplifier to make the millivolt output readable by the Teensy 3.6 flight 
+											<h3><b>Thermocouples</b></h3>
+											<h3>Each K-type, ungrounded thermocouple requires an amplifier to make the millivolt output readable by the Teensy 3.6 flight 
 												computer. For this, we chose the Adafruit MAX31856 amplifier due to its compatibility, reliability, and affordability. 
-												The MAX31856 communicates with the FC via the SPI serial protocol.</p>
+												The MAX31856 communicates with the FC via the SPI serial protocol.</h3>
 										</div>
 									</div>
 
 									<div class="row gtr-200">
 										<div class="col-6 col-12-small">
-											<h3>Load Cells</h3>
-											<p>Load cells are essentially electronic strain gauges, so they can be used to measure the weight of our tanks and the thrust 
+											<h3><b>Load Cells</b></h3>
+											<h3>Load cells are essentially electronic strain gauges, so they can be used to measure the weight of our tanks and the thrust 
 												generated by our engine. Similar to the thermocouples, each load cell outputs a millivolt signal which needs to be amplified 
-												for the FC. For this, we use the SparkFun HX711 amplifier which communicates with the FC via serial communication.</p>
+												for the FC. For this, we use the SparkFun HX711 amplifier which communicates with the FC via serial communication.</h3>
 										</div>
 										<div class="col-6 col-12-small">
-											<h3>Data Transmission</h3>
-											<p>All sensor measurements, valve states, and flight software variables are transmitted to the ground station via an Xbee radio. 
+											<h3><b>Data Transmission</b></h3>
+											<h3>All sensor measurements, valve states, and flight software variables are transmitted to the ground station via an Xbee radio. 
 												Data packets are sent 10 times a second, allowing for ground station operators to get a comprehensive view of the state of 
-												the entire system at any moment.</p>
+												the entire system at any moment.</h3>
 										</div>
 									</div>
 
@@ -135,8 +135,8 @@
 										</div>
 
 										<div class="col-6 col-12-medium">
-											<h3>Solenoid Actuation</h3>
-											<p>
+											<h3><b>Solenoid Actuation</b></h3>
+											<h3>
 												Solenoid valves are relatively simple devices – internally, they contain a coil of wire attached to a plunger that opens and closes 
 												the valve when a current is applied. The Teensy 3.6 cannot supply enough current to actuate these valves; thus, the FC controlled 
 												Arduino Relays, which supplied power from our 6S Lipos to open/close the valves. In future iteratios, the Arduino Relays will be replaced 
@@ -148,7 +148,7 @@
 												attached to a DG419 IC (essentially an electronic switch) that allows the relay to be controlled by both input sources. When the Launchbox 
 												is enabled, the enable pin for each DG419 is toggled HIGH, thereby connecting each relay to the groundstation and allowing for manual 
 												 override.
-											</p>
+											</h3>
 										</div>
 									</div>
 
@@ -157,14 +157,14 @@
 											<br/>
 											<br/>
 											<br/>
-											<h3>Power Distribution Board</h3>
-											<p>
+											<h3><b>Power Distribution Board</b></h3>
+											<h3>
 												As mentioned in the Solenoid Actuation section, every solenoid valve needs to be powered via an external battery source (in our case, 
 												a 6S lipo). The Power Distribution Board (PDB) provides multiple 24V and 12V terminals to power the various solenoids on the test stand. 
 												The board is powered via a 6S Lipo (24V battery) that runs through an external step-down converter to power the 12V terminals. Future 
 												iterations of the board will include built-in XT-60 connectors instead of solder pads to allow for better wiring organization and easier 
 												connections.
-											</p>
+											</h3>
 										</div>
 
 										<div class="col-6 col-12-medium">

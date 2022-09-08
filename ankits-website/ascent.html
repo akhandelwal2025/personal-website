@@ -35,15 +35,14 @@
 									<!-- Content -->	
 									<div class="row gtr-200">
 										<div class="col-6 col-12-small">
-											<p>
+											<h3>
 												As part of my high school Senior Research project, some friends and I wanted to build a SpaceX-like rocket that could autonomously hover and land. 
 												Though our formal reason for undertaking this project, codenamed Ascent, was to learn about control algorithms, 
 												the real reason was because we thought this was a dang-cool project!
 												<br/>
-												<br/>
-											</p>
+											</h3>
 											<h2 id="elements">Design Overview</h2>
-											<p>
+											<h3>
 												The goal of this project was to create an electrically powered rocket that could hover to 5m and autonomously land. The design consisted of two 
 												counter-rotating propellers that produced a max thrust of roughly 2kg. Thus, to achieve a 2:1 thrust-to-weight ratio, the mass of the craft was limited to at most 1kg.
 												<br/>
@@ -51,7 +50,7 @@
 												To control the craft in pitch and yaw, we decided to use a gimballed nozzle. Though we explored using servo-actuated thrust vanes (fins placed in the airstream 
 												that deflect air), we found that the thrust losses would be too high to sustain for our small craft. Also, throughout our initial research, we did not 
 												find any hobby or research projects that took on the challenge of a gimballed nozzle; thus, we decided to try it for ourselves. 
-											</p>
+											</h3>
 										</div>
 										<div class="col-6 col-12-small">
 											<span class="image fit"><img src="assets/images/ascent_profile_pic.PNG" alt="" /></span>
@@ -60,32 +59,32 @@
 									
 									<h2 id="elements">Mechanical Design</h2>
 									<div class="row gtr-200">
-										<p>
+										<h3>
 											The main hardware components of this project were the gimballed nozzle and the frame. Each was first designed in Fusion 360 CAD then manufactured primarily 
 											through 3D-printing. 
-										</p>	
+										</h3>	
 									</div>
 									
 									<div class="row gtr-200">
 										<div class="col-6 col-12-medium">
 											<span class="image fit"><img src="assets/images/gimbal_pics.PNG" alt="" /></span>
-											<h3>Gimbal</h3>
-											<p>
+											<h3><b>Gimbal</b></h3>
+											<h3>
 												Our gimbal design was primarily inspired by the solid-motor gimbal designed by Joe Barnard at BPS.Space. The design consists of two concentric rings that allow the converging 
 												nozzle to be actuated in the craft’s yaw and pitch axes. Two 9g servos actuate the nozzle in both axes using pushrods. This allows for a maximum gimbal rotation of &#177; 15 
 												degrees in each axis. Four small skateboard bearings were included to allow for smooth actuation of each ring. The total weight of the gimballed nozzle, including the servos, 
 												screws, bearings, and nozzle, was roughly 180g, 20 grams lower than our mass budget had initially allotted for.
-											</p>
+											</h3>
 										</div>
 
 										<div class="col-6 col-12-medium">
 											<span class="image fit"><img src="assets/images/frame_pics.PNG" alt="" /></span>
-											<h3>Frame</h3>
-											<p>
+											<h3><b>Frame</b></h3>
+											<h3>
 												The frame had to be designed to be durable but also easily manufactured in the inevitable case of a crash landing (or as SpaceX fans call it, a Rapid Unscheduled Disassembly – RUD 
 												for short). Thus, we built the frame out of strong, lightweight, cheap 5mm carbon fiber tubes. These were cut on a bandsaw to the right dimensions then attached together in a 
 												rectangular prism through easy-to-make, 3D-printed joints. We added styrofoam to the ends of the landing legs to absorb impact upon landing.
-											</p>
+											</h3>
 										</div>
 									</div> 
 									<div class="row gtr-200">
@@ -93,10 +92,7 @@
 											<iframe margin-top=5% margin-bottom=5% width=100% height=400em src="https://www.youtube.com/embed/1fI5t7o21aU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 										</div>
 										<div class="col-6 col-12-medium">
-											
-											<h1>
-												<br/>
-												<br/>
+											<h1 style="text-align:center; align-items:center;">
 												<b>
 													Watch our finished gimbal in action!
 												</b>
@@ -110,43 +106,43 @@
 										<span class="image fit"><img src="assets/images/high_level_control_system.PNG" alt="" /></span>
 									</div>
 									<div class="row gtr-200">
-										<p style="text-align:center;">
+										<h3 style="text-align:center;">
 											<b>
 											Simulink is an industry-standard software used to design and analyze all sorts of control systems. The high-level control system can be divided into three main 
 											components: PID Feedback, Environment Modelling, and Craft Modelling. 
 											</b>
-										</p>	
+										</h3>	
 									</div>
 									
 
 									<div class="row gtr-200">
 										<div class="col-4 col-12-medium">
 											<span class="image fit"><img src="assets/images/pid_block.PNG" alt="" /></span>
-											<h3>PID Feedback Block</h3>
-											<p>
+											<h3><b>PID Feedback Block</b></h3>
+											<h3>
 												Our main control system was built-upon three PID Feedback loops, one for each of the pitch, yaw, and roll axes. The onboard IMU provides position data in all 
 												9 degrees of freedom; thus, the error term for each feedback loop is calculated by subtracting the actual rotational position from the expected position. 
 												This error is fed into the PID, which outputs the necessary torque needed in each axis to correct the rotation. These torques are fed into a physics block 
 												that applies kinematic equations to find the required nozzle angles needed to cancel all rotations.
-											</p>
+											</h3>
 										</div>
 										<div class="col-4 col-12-medium">
 											<span class="image fit"><img src="assets/images/environment_modelling.PNG" alt="" /></span>
-											<h3>Environment Block</h3>
-											<p>
+											<h3><b>Environment Block</b></h3>
+											<h3>
 												Our custom environment block utilizes built-in atmospheric models in Simulink to predict how wind would affect the performance of our craft. Using the COESA 
 												Atmosphere block, which outputs measurements based on a standard atmospheric model, as well as a Wind Shear simulator for each axis, we were able to compute 
 												the net forces and moments on the craft caused by external factors.
-											</p>
+											</h3>
 										</div>
 										<div class="col-4 col-12-medium">
 											<span class="image fit"><img src="assets/images/6dof_physics.PNG" alt="" /></span>
-											<h3>Craft Modelling (Plant)</h3>
-											<p>
+											<h3><b>Craft Modelling (Plant)</b></h3>
+											<h3>
 												The craft was modelled using a 6DOF physics block, which is built into Simulink. The block takes in a matrix of the net forces and moments on the craft and outputs the 
 												resulting linear and angular positions of the craft. Of particular interest to us was the Euler angle outputs, which tell us the rotation of the craft in each of the 
 												three axes. These are fed back into the PID Feedback Block to compute the error terms and the cycle restarts.
-											</p>
+											</h3>
 										</div>
 									</div>
 
@@ -155,18 +151,16 @@
 											<br/>
 											<br/>
 											<br/>
-											<br/>
-											<br/>
-											<br/>
-											<h3>Kalman Filter</h3>
-											<p>
+											<h3><b>Kalman Filter</b></h3>
+											<h3>
 												One of my personal goals for this project was to understand how Kalman Filters work, a standard algorithm used to remove noise from sensor readings. To the right is a 
 												Python testing platform we created to test our filter. The code simulates data from our IMU, adding in Gaussian noise, and runs these through our Kalman Filter. 
 												The graphical and statistical outputs let us easily see the effectiveness of our algorithm.
-											</p>
+											</h3>
 										</div>
 										<div class="col-6 col-12-small">
-											<script src="https://gist.github.com/amtron521/4fbea38d0106f5b1de610f9f8cc0427b.js"></script>
+											iframe
+											<script src="https://gist.github.com/akhandelwal2025/4fbea38d0106f5b1de610f9f8cc0427b.js"></script>
 										</div>
 									</div>
 
@@ -176,25 +170,25 @@
 									</div>
 
 									<div class="row gtr-200">
-										<p>
+										<h3>
 											We chose to write our flight software in C++ as it is a compiled language that can easily be uploaded to our Arduino Teensy flight computer. Our flight software 
 											was based on a Read-Control-Actuate architecture, which employs “tasks” to execute different functions:
 
 											<ul style="margin-left: 5%; margin-bottom: 0%">
-												<li> Read Tasks – Gather and store all sensor information and groundstation commands</li>
-												<li> Control Tasks – Utilize data to make decisions and update variables</li>
-												<li> Actuate Tasks – Execute decisions made by Control Tasks</li>
+												<li> <b>Read Tasks</b> – Gather and store all sensor information and groundstation commands</li>
+												<li> <b>Control Tasks</b> – Utilize data to make decisions and update variables</li>
+												<li> <b>Actuate Tasks</b> – Execute decisions made by Control Tasks</li>
 											</ul>
-										</p> 
+										</h3> 
 										
-										<p>
+										<h3>
 											These tasks are run sequentially in a single thread by the MainControlLoop, which essentially just calls the <code> .execute </code> of each task. 
 											All sensor data and decision variables are stored inside the StateFieldRegistry, which contains specific fields that can only be edited by specific tasks.
-										</p>
+										</h3>
 									</div>	
 
 									<div class="row gtr-200">
-										<h1 style="margin-left:10%">
+										<h1 style="text-align:center;">
 											<b>This project is still in the works. Stay tuned to see it fly!</b> 
 										</h1>
 									</div>
