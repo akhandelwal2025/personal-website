@@ -24,6 +24,11 @@ h1{
   text-align: center;
 }
 
+.gist-data{
+  height:30em;
+  overflow-y: visible;
+}
+
 header.major > :last-child {
     border-bottom: solid 3px #f56a6a;
     display: inline-block;

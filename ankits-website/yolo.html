@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>YOLO Cone Detection Model</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main_editorial.css"/>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Ankit Khandelwal</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>YOLO Cone Detection Model</h1>
+									</header>
+
+									<!-- Content -->
+                                    <div div class="row gtr-200">
+										<span class="image fit"><img src="assets/images/yolo_comp.png" alt="" /></span>
+									</div>
+									<div class="row gtr-200">
+										<div>
+											<h3>
+												YOLOv5 (You Only Look Once) is a state-of-the-art object detection model that is used to localize features
+                                                within an image. As the lead of the Perceptions team on Carnegie Autonomous Racing, my team and I have been
+                                                developing this model to identify blue and yellow cones that denote the track our autonomous racecar needs
+                                                to follow. 
+											</h3>
+										</div>
+									</div> 
+									
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+                                            <br/>
+                                            <br/>
+											<span class="image fit"><img src="assets/images/yolo_theory.jpg" alt="" /></span>
+										</div>
+										<div class="col-6 col-12-medium">
+											<h2 id="elements">Theory of YOLO</h2>
+											<h3>
+                                                Unlike other object detection neural networks, which generate predictions after evaluating region proposals 
+                                                multiple times, YOLO has been built to output bounding box predictions after only a single pass of the entire
+                                                image. This dramatically reduces execution time, making YOLO a clear choice for autonomous vehicle perception 
+                                                systems which require high refresh rates. To create its predictions, YOLO follows the following steps:
+                                                
+                                                <ol>
+                                                    <br/>
+                                                    <li> The image is split into an nxn grid where n is a parameter set by the model designer. The larger n is,
+                                                         the higher the resolution of the grid, thereby allowing for detection of smaller and more frequent objects
+                                                         in the frame.
+                                                    </li>
+                                                    <br/>
+                                                    <li>
+                                                        Each grid cell is responsible for outputting a number of bounding box predictions for objects that appear in 
+                                                        that cell. For predictions originating from empty cells, they are associated with a very low confidence score, 
+                                                        indicating that bounding box is worthless. However, for predictions originating from cells that contain objects, 
+                                                        they are associated with high confidence scores.
+                                                    </li>
+                                                    ,<li>
+                                                        All bounding box predictions from all grid cells are aggregated, and only those predictions with a confidence higher 
+                                                        than some threshold (usually 80%) are actually output.
+                                                    </li>
+                                                    
+                                                </ol>
+
+											</h3>
+									</div> 
+                                    <div class="row gtr-200">
+                                        <h2 id="elements">Training Data</h2>
+									</div>
+                                    <div class="row gtr-200">
+                                        <div class="col-6 col-12-medium">
+
+                                        </div>
+                                    </div>
+                                    <div class="row gtr-200">
+										<div>
+											<h3>
+                                                We started with a pretrained <a href="https://github.com/ultralytics/yolov5" style="color: #47D3E5;">YOLOv5 model</a>
+                                                that was trained on the COCO dataset. This provided baseline weights that we could specifically train to recognize cones. 
+                                                To achieve cone detection, we trained the model on a dataset consisting of two styles of images:
+											</h3>
+										</div>
+									</div>
+									
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/fsoco_dataset.png" alt="" /></span>
+										</div>
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/simulator_dataset.png" alt="" /></span>
+										</div>
+									</div>
+
+									<div class="row gtr-200">
+										<div class="col-6 col-12-small">
+											<h3><b>FSOCO Images</b></h3>
+											<h3>
+                                                Formula Student provides an open-source dataset of real-world images of cones from the perspective of a racing car.
+                                                Each image comes with the ground-truth data labelled, allowing the model to be trained.
+                                            </h3>
+										</div>
+										<div class="col-6 col-12-small">
+											<h3><b>Simulator Images</b></h3>
+											<h3>
+                                                Our team uses an open-source <a href="https://gitlab.com/eufs/eufs_sim" style="color: #47D3E5;"> Formula Student simulator </a>
+                                                and collected time-synchronized images from the simulator's stereo camera.  
+                                            </h3>
+										</div>
+									</div>
+									
+									<div class="row gtr-200">
+										<div>
+											<h3>
+                                                <b>After almost 20 hours of training, here are some examples of what our model can do:</b>
+											</h3>
+										</div>
+									</div>
+
+                                    <div class="row gtr-200">
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/left_example.png" alt="" /></span>
+										</div>
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/middle_example.png" alt="" /></span>
+										</div>
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/right_example.png" alt="" /></span>
+										</div>
+									</div>
+									<hr class="major" />		
+								</section>
+
+						</div>
+					</div>
+					<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+                                        <li>
+                                            <span class="opener"></span>Projects</span>
+											<ul>
+												<li><a href="caelus-avionics.html">Caelus Avionics</a></li>
+												<li><a href="ascent.html">VTOL Craft</a></li>
+												<li><a href="drone_mark2.html">Custom Drone - Mark II</a></li>												
+												<li><a href="drone_mark1.html">Custom Drone - Mark I</a></li>
+											</ul>
+                                        </li>
+                                        
+									</ul>
+								</nav>
+
+						</div>
+					</div>
+
+					<!-- Scripts -->
+					<script src="assets/js/jquery.min.js"></script>
+					<script src="assets/js/browser.min.js"></script>
+					<script src="assets/js/breakpoints.min.js"></script>
+					<script src="assets/js/util.js"></script>
+					<script src="assets/js/main.js"></script>
+			
+
+	</body>
+</html>

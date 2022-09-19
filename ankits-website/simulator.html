@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Simulator Setup - Docker + ROS2</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main_editorial.css"/>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Ankit Khandelwal</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Simulator Setup - Docker + ROS2</h1>
+									</header>
+
+									<!-- Content -->
+                                    <div div class="row gtr-200">
+										<span class="image fit"><img src="assets/images/simulator_image.png" alt="" /></span>
+									</div>
+									<div class="row gtr-200">
+										<div>
+											<h3>
+												One of my big projects for Carnegie Mellon Racing - Autonomous in the Spring 2022 Semester was to setup an open-source
+												simulator that would allow our software subteams to test their code in a simulated environment. This allows for rapid testing
+												and iteration of the codebase without needing to deploy code on our expensive hardware.
+												</br>
+											</br>
+												The <a href="https://gitlab.com/eufs/eufs_sim" style="color: #47D3E5;">simulator</a> was developed by the Edinburgh University
+												Formula Student team and made open-source to help up-and-coming formula student teams test their code. The simulator simulates 
+												all aspects of a traditional autonomous formula-style racecar, including a VLP-16 LiDAR and Zed 2 Stereo Camera. Additionally,
+												the simulator supports custom track generation, allowing users to specify the environment and track layout they want to test their 
+												system on. 
+											</h3>
+										</div>
+									</div> 
+									
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+										</br>
+										</br>
+											<h2 id="elements">ROS2 Galactic</h2>
+											<h3>
+												The simulator is built on the ROS2 Galactic platform, sending out information via a Peer-to-Peer model in which subscriber nodes listen for any data published 
+												by the simulator. Throughout this project, I had to learn all of the intricacies related to ROS, including it's backend architecture, how to interface with nodes/topics,
+												and how to visualize incoming data using RVIZ. 
+												<br/>
+												<br/>
+												To the right is a Python script I wrote using the ROS package to collect time-synchronized LiDAR and Stereo Camera data from the simulator. The simulator output data from 
+												the onboard LiDAR and Stereo Camera as well as the ground-truth position for each cone. With this, we could run our algorithmns on the sampled data and compare our estimates 
+												to the ground-truth data. This allowed us to quantify the error in our algorithms and characterize what cases our pipeline was failing in.
+											</h3>
+										</div>
+										<div class="col-6 col-12-medium">
+											<script class="gist-data" src="https://gist.github.com/akhandelwal2025/ac84419d53c0f9f5a3398ba1fedbd0c6.js"></script>
+										</div>
+									<br/>
+									<br/>
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+											<script src="https://gist.github.com/akhandelwal2025/603cd5b3bd5b039410cab8a6edd6b66d.js"></script>
+										</div>
+										<div class="col-6 col-12-medium">
+										</br>
+									</br>
+											<h2 id="elements">Docker</h2>
+											<h3>
+                                                One of the issues with the simulator is that it is only compatible with Ubuntu 16.04. Very few people on our team had machines running Linux, and 
+												even fewer were willing to dual-boot their Windows/Mac machines with Ubuntu. For this reason, I had to find a way to make the simulator compatible 
+												with everyone's machines, regardless of what operating system they were running.
+											</br>
+											</br>
+												For this reason, I chose to "Docker-ize" the simulator, wrapping it in a Ubuntu 16.04 container that made the code platform-independent. This was my 
+												first time using Docker, so I had to learn how to create a Dockerfile (shown to the left) and push it to a publicly-accessible repository on DockerHub.
+												The container also comes with ROS2 Galactic, as well as several other dependencies pre-installed.
+											</h3>
+									</div> 
+									
+									<hr class="major" />		
+								</section>
+
+						</div>
+					</div>
+					<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+                                        <li>
+                                            <span class="opener"></span>Projects</span>
+											<ul>
+												<li><a href="caelus-avionics.html">Caelus Avionics</a></li>
+												<li><a href="ascent.html">VTOL Craft</a></li>
+												<li><a href="drone_mark2.html">Custom Drone - Mark II</a></li>												
+												<li><a href="drone_mark1.html">Custom Drone - Mark I</a></li>
+											</ul>
+                                        </li>
+                                        
+									</ul>
+								</nav>
+
+						</div>
+					</div>
+
+					<!-- Scripts -->
+					<script src="assets/js/jquery.min.js"></script>
+					<script src="assets/js/browser.min.js"></script>
+					<script src="assets/js/breakpoints.min.js"></script>
+					<script src="assets/js/util.js"></script>
+					<script src="assets/js/main.js"></script>
+			
+
+	</body>
+</html>
