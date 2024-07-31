@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>EKF SLAM</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main_editorial.css"/>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Ankit Khandelwal</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Extended Kalman Filter SLAM</h1>
+									</header>
+
+									<!-- Content -->
+                                    <div div class="row gtr-200">
+										<span class="image fit"><img src="assets/images/slam_frontpage.png" alt="" /></span>
+									</div>
+									<div class="row gtr-200">
+										<div>
+											<h3>
+                                                As part of my summer research with Professor John Dolan, I developed, optimized, and validated an Extended Kalman Filter based approach to SLAM. This approach 
+                                                will be deployed on 22e, the next-gen driverless racecar being developed by Carnegie Mellon Racing - Driverless, of which I am now the Project Lead.
+												</br>
+                                            </br>
+											</h3>
+										</div>
+									</div> 
+									
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+                                            <br/>
+                                            <br/>
+											<iframe style="height:90%;width:100%" src="https://www.iri.upc.edu/people/jsola/JoanSola/objectes/curs_SLAM/SLAM2D/SLAM%20course.pdf"></iframe>
+										</div>
+										<div class="col-6 col-12-medium">
+											<h2 id="elements">Theory of EKF-SLAM</h2>
+											<h3>
+                                                EKF-SLAM operates on the same principles as the Extended Kalman Filter. However, unlike a standard EKF, which often has a constant state matrix that tracks some robot features (position, velocity, rotations, etc.),
+												the EKF-SLAM algorithm constantly updates its state matrix and covariances to reflect discovery of new landmarks.
+												<br/>
+												<br/>
+												Similar to the EKF, every iteration the EKF-SLAM runs two steps:
+												<ul>
+                                                    <li>Prediction Step - Utilize a motion model and previous state to estimate what current state might be</li>
+                                                    <li>Update Step - Merge this estimate with odometry from some sensor suite, weighting based on the Kalman Gain</li>
+                                                </ul>
+												In addition to these steps, the EKF-SLAM algorithm has to run a data association algorithm to identify what are possible new landmarks. To solve this problem, I implemented a maximum-likelihood-estimator based on Mahalanobis Distance,
+												which is a heuristic similar to Euclidean Distance but enables matching points to distributions. Since each cone is modelled as a Gaussian distribution due to its associated noise, the Mahalanobis Distance is a great metric for data association.
+											</h3>
+									</div> 
+									</div> 
+									<div class="row gtr-200">
+										<h2 style="text-align:center;">
+											One of the big optimizations that I made was translating my original implementation in Python to C++, resulting in almost a 10Hz improvement in runtime. This resulted in more optimal pose and landmark estimation, reflecting closer to ground-truth values.</b> 
+										</h2>	
+									</div>
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+											<script src="https://gist.github.com/akhandelwal2025/d54d140d9f549fecb37d6f36068def04.js"></script>
+                                            <h2 style="text-align:center;">Python</h2>
+										</div>
+
+										<div class="col-6 col-12-medium">
+                                            <script src="https://gist.github.com/akhandelwal2025/8c257a232dc2e0379f126f4c4d166a3e.js"></script>
+                                            <h2 style="text-align:center;">C++</h2>
+										</div>
+									</div> 
+									<div class="row gtr-200">
+										<h1 style="text-align:center;">
+											<b>Watch the algorithm build a map on the simulator!</b> 
+										</h1>
+									</div>
+									<div class="row gtr-200">
+										<span class="image fit"><img src="assets/images/slam_working.gif" alt="" /></span>
+									</div>
+									
+									<hr class="major" />		
+								</section>
+
+						</div>
+					</div>
+					<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+                                        <li>
+                                            <span class="opener"></span>Projects</span>
+											<ul>
+                                                <li><a href="slam.html">EKF-SLAM</a></li>
+												<li><a href="hybrid.html">19a - Driverless Racecar</a></li>
+                                                <li><a href="yolo.html">YOLOv5 Object Detector</a></li>
+                                                <li><a href="simulator.html">Simulator - ROS2 + Docker</a></li>
+												<li><a href="caelus-avionics.html">Caelus Avionics</a></li>
+                                                <li><a href="ascent.html">VTOL Craft</a></li>
+												<li><a href="drone_mark2.html">Custom Drone - Mark II</a></li>												
+												<li><a href="drone_mark1.html">Custom Drone - Mark I</a></li>
+											</ul>
+                                        </li>
+                                        
+									</ul>
+								</nav>
+
+						</div>
+					</div>
+
+					<!-- Scripts -->
+					<script src="assets/js/jquery.min.js"></script>
+					<script src="assets/js/browser.min.js"></script>
+					<script src="assets/js/breakpoints.min.js"></script>
+					<script src="assets/js/util.js"></script>
+					<script src="assets/js/main.js"></script>
+			
+
+	</body>
+</html>

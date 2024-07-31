@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>19a - 1st Driverless Car to Complete Autonomous Lap at American FSAE Competition</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main_editorial.css"/>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Ankit Khandelwal</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>19a - Driverless FSAE Car</h1>
+									</header>
+
+									<!-- Content -->
+                                    <div div class="row gtr-200">
+										<span class="image fit"><img src="assets/images/team_pic.jpg" alt="" /></span>
+									</div>
+									<div class="row gtr-200">
+										<div>
+											<h3>
+												At the start of the 2022-2023 school year, Carnegie Mellon Racing - Driverless took on the ambitious project of converting our 2019 FSAE electric racecar
+                                                into a fully-Driverless vehicle. As the Perceptions Captain for this project, I was in charge of a team of 8 that worked get all Perceptions algorithms working
+                                                onboard the vehicle. This included using YOLOv5 object detection neural networks for cone detection as well as ground-filtering and point-cloud clustering algorithms
+                                                to pick out cone clusters from our LiDAR point clouds.
+												</br>
+                                            </br>
+											</h3>
+										</div>
+									</div> 
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/yolo_running_fms_lot.gif" alt="" /></span>
+											<h3><b>YOLOv5 Object Detection Network</b></h3>
+											<h3>
+												This gif shows the execution of our YOLOv5 Object Detection network that is responsible for locating blue, yellow, and orange cones in the input camera frames.
+                                                This model was trained on an open-source dataset maintained by the FSAE community, to which we added our own dataset augmentations. Specifically, the augmentations that we found worked best were:
+                                                <ul>
+                                                    <li>Gaussian Blur - simulated foggy conditions + drop in camera resolution</li>
+                                                    <li>Random Rotation + Translations - enabled model to detect cones at odd perspectives or fallen-over cones</li>
+                                                </ul>
+                                                We also explored a variety of methods for training the model with hyperparameter optimizations, specifically with a Genetic Algorithm. 
+
+                                                In the end our model was able to achieve 92% accuracy of detection of cones and their corresponding colors. We will be experimenting with upgrading this model to YOLOv8 in the future in hopes of
+                                                improving performance and will be implementing better benchmarking profiles to improve our understanding of the accuracy of the model.
+											</h3>
+										</div>
+
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/new_lidar.gif" alt="" /></span>
+											<h3><b>LiDAR Ground-Filtering + Pointcloud Clustering</b></h3>
+											<h3>
+												In addition to the stereo vision pipeline, we use a LiDAR-based approach to get a separate number of cone estimates. Our LiDAR stack operates using the following two processes: 1
+											</br>
+										</br>
+												Our Ground-Filtering algorithm involves radially segmenting the pointcloud into different regions, identifying the lowest point in each segment, and then fitting a plane of best fit to all points across
+												all regions. The algorithm can be tuned by changing how discrete the segmentation is, thereby allowing us to tradeoff accuracy for performance.
+											</br>
+										</br>
+												Our pointcloud clustering algorithm works based on the DBSCAN algorithm, which is essentially a variant of K-Means that doesn't require prior knowledge of the number of expected clusters. Instead, the algorithm is initialized
+												with the minimum number of points that are expected per cluster as well as the maximum distance between two points for them to be considered neighbors. 
+
+											</h3>
+										</div>
+									</div> 
+									<div class="row gtr-200">
+										<h2 style="text-align:center;">
+											After 1500+ hours, we developed a Driverless racecar that completed the <b> 1st autonomous lap at an American FSAE competition!</b> 
+										</h2>	
+									</div>
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/onboard_19a.gif" alt="" /></span>
+										</div>
+
+										<div class="col-6 col-12-medium">
+											<span class="image fit"><img src="assets/images/19a_third_person.gif" alt="" /></span>
+										</div>
+									</div> 
+									<hr class="major" />		
+								</section>
+
+						</div>
+					</div>
+					<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+                                        <li>
+                                            <span class="opener"></span>Projects</span>
+											<ul>
+                                                <li><a href="slam.html">EKF-SLAM</a></li>
+												<li><a href="hybrid.html">19a - Driverless Racecar</a></li>
+                                                <li><a href="yolo.html">YOLOv5 Object Detector</a></li>
+                                                <li><a href="simulator.html">Simulator - ROS2 + Docker</a></li>
+												<li><a href="caelus-avionics.html">Caelus Avionics</a></li>
+                                                <li><a href="ascent.html">VTOL Craft</a></li>
+												<li><a href="drone_mark2.html">Custom Drone - Mark II</a></li>												
+												<li><a href="drone_mark1.html">Custom Drone - Mark I</a></li>
+											</ul>
+                                        </li>
+                                        
+									</ul>
+								</nav>
+
+						</div>
+					</div>
+
+					<!-- Scripts -->
+					<script src="assets/js/jquery.min.js"></script>
+					<script src="assets/js/browser.min.js"></script>
+					<script src="assets/js/breakpoints.min.js"></script>
+					<script src="assets/js/util.js"></script>
+					<script src="assets/js/main.js"></script>
+			
+
+	</body>
+</html>

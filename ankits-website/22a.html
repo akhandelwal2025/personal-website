@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>22a - Autonomous FSAE Racecar w/ Top Speed of 40mph</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main_editorial.css"/>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Ankit Khandelwal</strong></a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Project Lead for Carnegie Mellon Racing</h1>
+										<h1>22a - Autonomous Racecar w/ Top Speed of 40MPH</h1>
+									</header>
+
+									<!-- Content -->
+                                    <div class="row gtr-200">
+										<span class="image fit"><img src="assets/images/22a.jpg" alt="" /></span>
+									</div>
+									<div style="text-align: center;">
+										<h2 > If you haven't checked out the predecessor to this vehicle, 19a, check it out <a href src="hybrid.html" style="color: #47D3E5;">here!</a></h2>
+									</div>
+									<div class="row gtr-200">
+										<div class="col-6 col-12-medium">
+											<iframe width=100% height=100% src="https://www.youtube.com/embed/QTRRn4fTQMg?si=XM8Pv-nwQQAvXx1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+										</div>
+										<div class="col-6 col-12-medium">
+											<h2 id="elements">What is Carnegie Mellon Racing- Driverless?</h2>
+											<h3>
+                                                Carnegie Mellon Racing - Driverless is CMU's premier autonomous formula-student racing team that converts championship, electric racecars into fully driverless vehicles. I helped found the project in my freshman year and was elected <b>VP of Driverless during the 2023-2024 school year.</b>
+											</h3>
+											<h2 id="elements">What was my role as VP of Driverless?</h2>
+											<h3>
+                                                Our previous gen car 19a, while impressive, was extremely unreliable and had a very rudimentary software stack running on it. As a result, when I took over the team, I had an ambitious vision of overhaulting the entire technical platform as well as how the team was managed. My main goals and responsibilities were:
+												<br/>
+												<br/>
+												<ul>
+													<li>Overhauling all software, mechanical, and electrical aspects of the vehicle to develop a more robust, higher performance vehicle </li>
+													<li>Growing the team from a just 6 members to over 30 talented engineers</li>
+													<li>Gaining over $30,000 in in-kind sponsorships for GPUs and state-of-the-art sensors (LiDAR + GPS)</li>
+													<li>Working with Formula Student + corporate sponsors to establish a Driverless competition here in North America</li>
+												</ul>
+												<b>
+													In the end, I led development of what is now considered one of the most technically advanced Formula Student Driverless racecars in North America.
+
+												</b>
+											</h3>
+										</div> 
+									</div>
+									<br/>
+									<div style="text-align: center;">
+										<h1><b> Technical Achievements of 22a</b></h1>
+									</div>
+
+									<div class="row gtr-200">
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/stereo_cropped.gif" alt="" /></span>
+											<h3><b>Cone Detection on Stereo Images via YOLOv8</b></h3>
+											<h3>
+												We trained a YOLOv8 model to detect the blue, yellow, and orange cones that form track boundaries. We used an open-source Formula Student cones dataset and used 
+												a variety of augmentation techniques, including gaussian blur, random rotation, and hue/saturation augmentations. The runtime of the model was improved to just 20ms
+												by using quantization techniques to reduce the precision of our parameters from 32-bit floats to 8-bit integers. Our experiments show that the model achieves a mAP of 0.92.
+											</h3>
+										</div>
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/black_proper_crop.gif" alt="" /></span>
+											<h3><b>Solid-State LiDAR Filtering, Clustering, Coloring</b></h3>
+											<h3>
+												One of the big improvements on 22a is the use of a Hesai AT128 lidar for accurate depth estimation of cones. We utilize a plane-fitting algorithm to remove ground points then run DBSCAN 
+												on the pointcloud to pick out clusters that are likely to represent cones. This is passed into a coloring algorithm based on Iterative-Closest-Point as well as a regression model based on the average reflectance
+												of the cluster to classify each cluster as a blue, yellow, or orange cone. 
+											</h3>
+										</div>
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/path_planner.gif" alt="" /></span>
+											<h3><b>Novel Support Vector Machine Path Planner</b></h3>
+											<h3> 
+												We recast the path planning problem as a classification problem where the goal is to find the decision boundary between the set of blue cones on the left side of the track and the yellow cones on the right side of the track.
+												We decided to use a nonlinear SVM as the decision boundaries 
+												are likely to solve the midline problem due to the construction of the support vectors that guaruntee the decision boundary is as far away from both classes as it can be (in our case, the track midline).
+											</h3>
+										</div>
+									</div>
+									<div class="row gtr-200">
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/mppi.gif" alt="" /></span>
+											<h3><b>Monte-Carlo MPC Controller</b></h3>
+											<h3>
+												As one of the most advanced controllers deployed on a Formula Student vehicle, this Monte-Carlo MPC controller samples 128,000 possible control actions and simulates them on a vehicle dynamics model. A cost function based on distance to track bounds
+												and kinematic constraints is used to weight each trajectory, and the final control action is output as a weighted average. The trajectory rollouts are all parallelized on the GPU through CUDA programming.
+											</h3>
+										</div>
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/daq_live.gif" alt="" /></span>
+											<h3><b>DAQ-Live: Webpage for Live Vehicle Monitoring</b></h3>
+											<h3>
+												In order to aid our debugging efforts, we developed a webpage called DAQ-Live to give us a livestream of all perceptions + path planning outputs. The webpage can also give live feeds of all sensor data onboard the vehicle (including camera, lidar, and gps data).
+												The webpage was designed using Node.js and ROS Web Bridge.
+											</h3>
+										</div>
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/slam_gen.gif" alt="" /></span>
+											<h3><b>iSAM2: State-of-the-Art SLAM</b></h3>
+											<h3>
+												Working with Professor Michael Kaess, we were able to implement the Iterative Smoothing and Mapping (iSAM2) SLAM algorithm in order to map out the track. This implementation uses a factor-graph approach to generate tokens for cone landmarks and vehicle positions and continuously
+												uses solves a nonlinear optimization problem to refine the vehicle + landmark poses in order to prevent drift. The maps generated by this algorithm will be used to inform more complex path planning algorithms in future years in order to improve from midline paths to minimum-time paths.
+											</h3>
+										</div>
+									</div>
+									<div class="row gtr-200">
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/alv.gif" alt="" /></span>
+											<h3><b>Redesigned Autonomous Low Voltage System</b></h3>
+											<h3>
+												We had to redesign the low voltage system of our existing electric vehicle in order to add in critical safety features and new power distribution to the sensors we were adding. Specifically, we designed a brand new PCB called the Autonomous Interface Module (AIM) that triggered the pneumatic emergency brakes
+												in case of a remote e-stop press, distributed power to all of our sensors, and communicated with the main CPU onboard the vehicle to parse its throttle and steering wheel requests and apply them to the vehicle. The board's firmware was written in C and all debugging of CAN messages happened through PCAN.
+											</h3>
+										</div>
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/steering.gif" alt="" /></span>
+											<h3><b>Responsive Autonomous Steering System</b></h3>
+											<h3>
+												In order to hit our top speed target of 40mph, we designed a autonomous steering system that could actuate the front axle lock-to-lock in under 1 second. The design used a powerful motor + gearbox to turn the steering rack. A PID loop was used to ensure quick response from the motor while preventing overshooting of the
+												target wheel angle setpoints. The system was robust enough to handle close to a 100 miles of on-track testing. 
+											</h3>
+										</div>
+										<div class="col-4 col-12-medium">
+											<span class="image fit"><img src="assets/images/full_car_render.png " alt="" /></span>
+											<h3><b>22a - Completely Redesigned from First Principles</b></h3>
+											<h3>
+												22a is Carnegie Mellon Racing's most advanced driverless racecar ever and widely considered one of the most advanced Formula Student Driverless racecar in North America. By pushing for an overhaul of design and continuously seeking the bounds of technical achievement, I am proud to have overseen the development of a really fast racecar!
+											</h3>
+										</div>
+									</div>
+									<hr class="major" />		
+								</section>
+
+						</div>
+					</div>
+					<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+                                        <li>
+                                            <span class="opener"></span>Projects</span>
+											<ul>
+                                                <li><a href="slam.html">EKF-SLAM</a></li>
+												<li><a href="hybrid.html">19a - Driverless Racecar</a></li>
+                                                <li><a href="yolo.html">YOLOv5 Object Detector</a></li>
+                                                <li><a href="simulator.html">Simulator - ROS2 + Docker</a></li>
+												<li><a href="caelus-avionics.html">Caelus Avionics</a></li>
+                                                <li><a href="ascent.html">VTOL Craft</a></li>
+												<li><a href="drone_mark2.html">Custom Drone - Mark II</a></li>												
+												<li><a href="drone_mark1.html">Custom Drone - Mark I</a></li>
+											</ul>
+                                        </li>
+                                        
+									</ul>
+								</nav>
+
+						</div>
+					</div>
+
+					<!-- Scripts -->
+					<script src="assets/js/jquery.min.js"></script>
+					<script src="assets/js/browser.min.js"></script>
+					<script src="assets/js/breakpoints.min.js"></script>
+					<script src="assets/js/util.js"></script>
+					<script src="assets/js/main.js"></script>
+			
+
+	</body>
+</html>
